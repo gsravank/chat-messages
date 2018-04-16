@@ -35,19 +35,23 @@ def get_message_details(messages):
     message_times = list()
     senders = list()
     message_texts = list()
+    datetimes = list()
 
     for message in messages:
         try:
             # Get date
             time = message[:19]
-            datetime_obj = parse(time)
+
+            # Change to mm.dd.yyyy format
+            new_time = time[3:5] + '.' + time[:2] + time[5:]
+            datetime_obj = parse(new_time)
 
             remaining_line = message[21:]
 
             # Get user name
             for idx, char in enumerate(remaining_line):
                 if char == ':':
-                    colon_idx =  idx
+                    colon_idx = idx
                     break
 
             user_text = remaining_line[:colon_idx]
@@ -64,13 +68,32 @@ def get_message_details(messages):
             message_times.append(time)
             senders.append(sender)
             message_texts.append(text)
+            datetimes.append(datetime_obj)
         except Exception:
             pass
 
-    final_df = pd.DataFrame({'time': message_times, 'sender': senders, 'text': message_texts})
-    final_df = final_df[['time', 'sender', 'text']]
+    final_df = pd.DataFrame({'time': message_times, 'sender': senders, 'text': message_texts, 'datetime': datetimes})
+    final_df = final_df[['time', 'sender', 'text', 'datetime']]
 
     return final_df
+
+
+def get_time_details(messages_df):
+    # Get year, month, date, hour, min, sec, weekday from datetime object
+    messages_df['year'] = messages_df['datetime'].apply(lambda dt: dt.year)
+    messages_df['month'] = messages_df['datetime'].apply(lambda dt: dt.month)
+    messages_df['date'] = messages_df['datetime'].apply(lambda dt: dt.day)
+    messages_df['hour'] = messages_df['datetime'].apply(lambda dt: dt.hour)
+    messages_df['minute'] = messages_df['datetime'].apply(lambda dt: dt.minute)
+    messages_df['second'] = messages_df['datetime'].apply(lambda dt: dt.second)
+    messages_df['weekday'] = messages_df['datetime'].apply(lambda dt: dt.strftime("%A"))
+
+    return messages_df
+
+
+def process_text_message(messages_df):
+    # messages_df['processed_text'] =
+    return messages_df
 
 
 def main():
@@ -79,16 +102,13 @@ def main():
 
     # Get message dataframe
     messages_df = get_message_details(messages)
-    print('\n\n')
-    print(messages_df[100:200])
 
-    # s = messages_df.iloc[101]['text']
-    # print(s)
-    # print(len(s))
-    # print(type(s))
-    # print(s.isalpha())
-    # print(bytes(s, encoding='utf-8'))
-    # print(len(bytes(s, encoding='utf-8')))
+    # Get time related details
+    messages_df = get_time_details(messages_df)
+
+    # Process text message
+    messages_df = process_text_message(messages_df)
+    print(messages_df.head(20))
 
 
     return
