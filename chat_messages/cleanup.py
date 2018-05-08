@@ -1,5 +1,5 @@
 from chat_messages.config import ORIGINAL_MESSAGES_PATH, PROCESSED_MESSAGES_PATH
-from chat_messages.text_utils import identify_forwards, identify_links, identify_special_texts, separate_emojis_at_the_end_of_tokens, separate_tokens_with_dots, convert_smileys_to_emojis, handle_special_characters_at_the_start_of_tokens, seperate_special_characters_at_the_end_of_tokens
+from chat_messages.text_utils import identify_forwards, identify_links, identify_special_texts, separate_emojis_at_the_end_of_tokens, separate_tokens_with_dots, convert_smileys_to_emojis, handle_special_characters_at_the_start_of_tokens, separate_special_characters_at_the_end_of_tokens
 
 
 from dateutil.parser import parse
@@ -109,7 +109,7 @@ def process_text_message(text):
         text = separate_emojis_at_the_end_of_tokens(text)
 
         # Separate special characters at the end of words
-        text = seperate_special_characters_at_the_end_of_tokens(text)
+        text = separate_special_characters_at_the_end_of_tokens(text)
 
         # Special characters at the beginning of words
         text = handle_special_characters_at_the_start_of_tokens(text)
@@ -140,8 +140,16 @@ def main():
     messages_df = get_time_details(messages_df)
 
     # Process text message
-    messages_df = get_processed_text(messages_df)
-    print(messages_df.head(20))
+    # messages_df = get_processed_text(messages_df)
+    # print(messages_df.head(20))
+
+    # Test Area
+    # L = '\n' + '=' * 80 + '\n'
+    # messages_df['processed_text'] = messages_df['text'].apply(lambda text: separate_emojis_at_the_end_of_tokens(text))
+    # temp_df = messages_df[messages_df['text'] != messages_df['processed_text']]
+    # print(temp_df[['text', 'processed_text']].head(20))
+    # temp_df.to_csv('data/emoji_texts.csv')
+
 
 
     return
