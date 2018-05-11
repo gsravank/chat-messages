@@ -53,16 +53,21 @@ def separate_emojis_at_the_end_of_tokens(text):
 
 
 def separate_special_characters_at_the_end_of_tokens(text):
-    return
+    special_characters = [',', '.']
+
+    for special_character in special_characters:
+        text = text.replace(special_character, '')
+
+    text = ' '.join(text.split())
+
+    return text
 
 
 def convert_smileys_to_emojis(text):
-    return
+    smileys = [':)', ':p', ':(']
+    emojis = ['😀', '😟','😋']
 
+    for smiley, emoji in zip(smileys, emojis):
+        text = text.replace(smiley, emoji)
 
-def handle_special_characters_at_the_start_of_tokens(text):
-    return
-
-
-def separate_tokens_with_dots(text):
-    return
+    return text
