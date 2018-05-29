@@ -21,4 +21,4 @@ class Person(object):
              name (str): Name of the person
              messages (list): List of message objects
         """
-        self.name = name
+        self._name = name
