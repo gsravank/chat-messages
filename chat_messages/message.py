@@ -15,7 +15,7 @@ class Message(object):
 
     """
 
-    def __init__(self, text):
+    def __init__(self, text, sender, time):
         """
         Constructor to initialise the message details
 
@@ -23,3 +23,5 @@ class Message(object):
              text (str): The processed/original text message
         """
         self._text = text
+        self._sender = sender
+        self._time = time

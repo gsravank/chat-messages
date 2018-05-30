@@ -135,9 +135,9 @@ def main():
 
     # Process text message
     messages_df = get_processed_text(messages_df)
-    messages_df.to_csv(PROCESSED_MESSAGES_PATH, CSV_SEP)
+    # messages_df.to_csv(PROCESSED_MESSAGES_PATH, CSV_SEP)
 
-    # print(messages_df.head(20))
+    print(messages_df.head(20))
 
     return
 
