@@ -97,22 +97,27 @@ def process_text_message(text):
     # Lower
     text = text.lower()
 
-    # Check if message is not a regular text
-    if_forward = identify_forwards(text)
-    if_link = identify_links(text)
-    if_special_text = identify_special_texts(text)
+    # # Check if message is not a regular text
+    # if_forward = identify_forwards(text)
+    # if_link = identify_links(text)
+    # special_text = identify_special_texts(text)
+    #
+    # if if_forward:
+    #     text = '[[FWD]]'
+    # elif if_link:
+    #     text = '[[LINK]]'
+    # elif special_text:
+    #     text = special_text
+    # else:
 
-    if if_forward or if_link or if_special_text:
-        text = 'special_text'
-    else:
-        # Separate emojis at the end of words
-        text = separate_emojis_at_the_end_of_tokens(text)
+    # Separate emojis at the end of words
+    text = separate_emojis_at_the_end_of_tokens(text)
 
-        # Separate special characters at the end of words
-        text = separate_special_characters_at_the_end_of_tokens(text)
+    # Separate special characters at the end of words
+    text = separate_special_characters_at_the_end_of_tokens(text)
 
-        # Convert smileys to emojis
-        text = convert_smileys_to_emojis(text)
+    # Convert smileys to emojis
+    text = convert_smileys_to_emojis(text)
 
     return text
 
@@ -131,13 +136,13 @@ def main():
     messages_df = get_message_details(messages)
 
     # Get time related details
-    messages_df = get_time_details(messages_df)
+    # messages_df = get_time_details(messages_df)
 
     # Process text message
     messages_df = get_processed_text(messages_df)
-    # messages_df.to_csv(PROCESSED_MESSAGES_PATH, CSV_SEP)
+    messages_df.to_csv(PROCESSED_MESSAGES_PATH, CSV_SEP)
 
-    print(messages_df.head(20))
+    print(messages_df.head(100))
 
     return
 

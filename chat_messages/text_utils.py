@@ -3,7 +3,12 @@ import emoji
 
 def identify_special_texts(text):
     if text[:2] == '[[':
-        return True
+        type_of_text = text[2:]
+        type_of_text = type_of_text.split(']]')[0]
+        type_of_text = type_of_text.split(' ')[0]
+        type_of_text = type_of_text.strip(',')
+
+        return '[[' + type_of_text + ']]'
     else:
         return False
 

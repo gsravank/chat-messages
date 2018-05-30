@@ -4,3 +4,8 @@ PROCESSED_MESSAGES_PATH = '/Users/sravan/Desktop/projects/chat-messages/chat_mes
 
 # String Constants
 CSV_SEP = '\x01'
+
+# DataFrame Column Names
+SENDER_COL = 'sender'
+TEXT_COL = 'processed_text'
+DATETIME_COL = 'datetime'
