@@ -136,7 +136,7 @@ def main():
     messages_df = get_message_details(messages)
 
     # Get time related details
-    # messages_df = get_time_details(messages_df)
+    messages_df = get_time_details(messages_df)
 
     # Process text message
     messages_df = get_processed_text(messages_df)
