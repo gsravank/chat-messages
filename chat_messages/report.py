@@ -44,6 +44,9 @@ class Report(object):
         self._messages = self.get_messages()
         self._words = self.get_words()
 
+    def get_name(self):
+        return self._sender
+
     def get_messages(self):
         """
         Get list of messages sent by the person.
