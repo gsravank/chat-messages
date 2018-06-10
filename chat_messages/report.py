@@ -221,13 +221,16 @@ def main():
 
     # Most used words
     print('Top words used by Sravan:\n')
+    sravan_total_num_words = len(sravan_report.get_words())
     for word, count in sravan_report.get_frequent_words()[:16]:
         if word[:2] != '[[':
-            print('"{}": {}'.format(word, count))
+            print('{} - {:02.1f}%'.format(word, 100.0 * float(count)/sravan_total_num_words))
     print('\n')
+
     print('Top words used by Harsha:\n')
+    harsha_total_num_words = len(harsha_report.get_words())
     for word, count in harsha_report.get_frequent_words()[:15]:
-        print('"{}": {}'.format(word, count))
+        print('{} - {:02.1f}%'.format(word, 100.0 * float(count)/harsha_total_num_words))
     print('\n' + '=' * 80 + '\n')
 
 
@@ -267,21 +270,21 @@ def main():
     print(harsha_messages_by_date.head())
     print('\n' + '=' * 80 + '\n')
 
-    N = len(sravan_messages_by_date)
-    ind = np.arange(N)
-    width = 0.1
-
-    fig = plt.figure(figsize=(10, 8))
-    ax = fig.add_subplot(111)
-    rects1 = ax.bar(ind, sravan_messages_by_date[TEXT_COL].tolist(), width)
-    rects2 = ax.bar(ind + width, harsha_messages_by_date[TEXT_COL].tolist(), width)
-
-    ax.set_title('Messages Sent Over the Year')
-    ax.set_xticks(ind + width / 2)
-    # ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-    ax.legend((rects1[0], rects2[0]), ('Sravan', 'Harsha'))
-
-    plt.show()
+    # N = len(sravan_messages_by_date)
+    # ind = np.arange(N)
+    # width = 0.1
+    #
+    # fig = plt.figure(figsize=(10, 8))
+    # ax = fig.add_subplot(111)
+    # rects1 = ax.bar(ind, sravan_messages_by_date[TEXT_COL].tolist(), width)
+    # rects2 = ax.bar(ind + width, harsha_messages_by_date[TEXT_COL].tolist(), width)
+    #
+    # ax.set_title('Messages Sent Over the Year')
+    # ax.set_xticks(ind + width / 2)
+    # # ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    # ax.legend((rects1[0], rects2[0]), ('Sravan', 'Harsha'))
+    #
+    # plt.show()
     # fig.savefig('images/messages_by_month_bar.png')
 
     # Messages by month
@@ -341,12 +344,32 @@ def main():
     # Most frequent emojis
 
     print('Sravans top emojis:\n')
-    for emoj, count in sravan_report.get_frequent_emojis()[:5]:
+    for emoj, count in sravan_report.get_frequent_emojis()[:10]:
         print("{}: {}".format(emoj, count))
     print('\n\nHarshas top emojis: \n')
-    for emoj, count in harsha_report.get_frequent_emojis()[:5]:
+    harsha_emojis = list()
+    harsha_emoji_counts = list()
+
+    for emoj, count in harsha_report.get_frequent_emojis()[:10]:
         print("{}: {}".format(emoj, count))
+        harsha_emojis.append("{}".format(emoji))
+        harsha_emoji_counts.append(count)
     print('\n' + '=' * 80 + '\n')
+
+    print(harsha_emojis)
+    print(harsha_emoji_counts)
+
+    num_values = 10
+    ind = np.arange(num_values)
+
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111)
+    values_one = harsha_emoji_counts
+    rects1 = ax.bar(ind, values_one, 0.4, color='#ff7f0e')
+
+    ax.set_title("Harsha's Frequent Emojis")
+    # ax.set_xticks(['' for _ in range(num_values)])
+    fig.savefig('images/harsha_emojis_bar.png')
 
     # Most active day
     print(sravan_report.get_most_active_day())

@@ -35,7 +35,7 @@ class Plots(object):
             plt.show()
 
         if save_file:
-            fig.savefig(save_file, bbox_inches='tight')
+            fig.savefig(save_file)
 
     @staticmethod
     def side_by_side_bar_chart(num_values, width, figsize, values_one, values_two, title, labels, xtick_pos, xtick_labels, display_plot=False, save_file=None):
@@ -85,7 +85,7 @@ class Plots(object):
         title = 'Messages by Weekday'
         labels = self._names
 
-        xtick_pos = ( ind + width / 2)
+        xtick_pos = ( ind - (width / 2))
         xtick_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
         self.side_by_side_bar_chart(num_values, width, figsize, values_one, values_two, title, labels, xtick_pos, xtick_labels, display_plot=display_plot, save_file=file_path)
@@ -102,7 +102,7 @@ class Plots(object):
         title = 'Messages by Month'
         labels = self._names
 
-        xtick_pos = ( ind + width/2 )
+        xtick_pos = ( ind - width/2 )
         xtick_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
         self.side_by_side_bar_chart(num_values, width, figsize, values_one, values_two, title, labels, xtick_pos,
@@ -120,7 +120,7 @@ class Plots(object):
         title = 'Messages by Hour of Day'
         labels = self._names
 
-        xtick_pos = ( ind + width/2)
+        xtick_pos = ( ind - width/2)
         xtick_labels = range(24)
 
         self.side_by_side_bar_chart(num_values, width, figsize, values_one, values_two, title, labels, xtick_pos,

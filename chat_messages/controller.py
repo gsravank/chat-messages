@@ -31,13 +31,13 @@ def main():
     plot_obj = Plots(harsha_report, sravan_report)
 
     # Pie Charts
-    plot_obj.pie_chart_num_messages(display_plot=True)
-    plot_obj.pie_chart_num_words(display_plot=True)
+    plot_obj.pie_chart_num_messages(display_plot=False, file_path='/Users/sravan/Desktop/projects/chat-messages/chat_messages/images/number_of_messages_sent_pie.png')
+    plot_obj.pie_chart_num_words(display_plot=False, file_path='/Users/sravan/Desktop/projects/chat-messages/chat_messages/images/number_of_words_sent_pie.png')
 
     # Side by side bar charts
-    plot_obj.bar_chart_messages_by_month(display_plot=True)
-    plot_obj.bar_chart_messages_by_weekday(display_plot=True)
-    plot_obj.bar_chart_messages_by_hour(display_plot=True)
+    plot_obj.bar_chart_messages_by_month(display_plot=False, file_path='/Users/sravan/Desktop/projects/chat-messages/chat_messages/images/messages_by_month_bar.png')
+    plot_obj.bar_chart_messages_by_weekday(display_plot=False, file_path='/Users/sravan/Desktop/projects/chat-messages/chat_messages/images/messages_by_weekday_bar.png')
+    plot_obj.bar_chart_messages_by_hour(display_plot=False, file_path='/Users/sravan/Desktop/projects/chat-messages/chat_messages/images/messages_by_hour_bar.png')
 
     return
 
